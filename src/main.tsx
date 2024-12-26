@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Authenticator } from '@aws-amplify/ui-react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import App from "./App.tsx";
-import Home from "./pages/home/Home.tsx";
-import Navbar from "./pages/Navbar.tsx";
+import Home from "./screens/home/Home.tsx";
+import SignIn from "./screens/sign-in/SignIn.tsx";
+import Navbar from "./components/navbar/Navbar.tsx";
 import "./index.css";
 import { Amplify } from "aws-amplify";
 import outputs from "../amplify_outputs.json";
@@ -19,11 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/todos" element={
-            <Authenticator>
-              <App />
-            </Authenticator>
-          } />
+          <Route path="/sign-in" element={<SignIn />} />
         </Routes>
       </div>
     </BrowserRouter>

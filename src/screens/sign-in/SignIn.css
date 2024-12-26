@@ -1,0 +1,25 @@
+.sign-in-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 120px 2rem 0;
+}
+
+.signed-in-content {
+  text-align: center;
+}
+
+.sign-out-button {
+  background-color: #006acc;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.sign-out-button:hover {
+  background-color: #0055b3;
+} 
