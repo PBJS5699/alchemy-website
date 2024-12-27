@@ -11,7 +11,7 @@
   flex-direction: column;
   align-items: center;
   gap: 3rem;
-  margin-top: -10.0rem;
+  margin-top: 0;
 }
 
 .welcome-text {
