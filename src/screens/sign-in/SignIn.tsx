@@ -56,16 +56,19 @@ const theme = {
 function SignIn() {
   return (
     <main className="sign-in-container">
-      <ThemeProvider theme={theme}>
-        <Authenticator>
-          {({ signOut }) => (
-            <div className="signed-in-content">
-              <h2>Welcome to Alchemy AI</h2>
-              <button onClick={signOut} className="sign-out-button">Sign out</button>
-            </div>
-          )}
-        </Authenticator>
-      </ThemeProvider>
+      <div className="auth-wrapper">
+        <h1 className="welcome-text">Welcome to Alchemy</h1>
+        <ThemeProvider theme={theme}>
+          <Authenticator>
+            {({ signOut }) => (
+              <div className="signed-in-content">
+                <h2>Welcome to Alchemy AI</h2>
+                <button onClick={signOut} className="sign-out-button">Sign out</button>
+              </div>
+            )}
+          </Authenticator>
+        </ThemeProvider>
+      </div>
     </main>
   );
 }
