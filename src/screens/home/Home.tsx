@@ -2,6 +2,7 @@ import './Home.css';
 import nodeBasedImg from '../../assets/screenshots/node-based.png';
 import automaticTrainingImg from '../../assets/screenshots/automatic-training.png';
 import fullyReproducibleImg from '../../assets/screenshots/fully-reproducible.png';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -61,7 +62,7 @@ function Home() {
       <footer className="footer">
         <p>Copyright © 2024 Alchemy A.I. | All Rights Reserved</p>
         <div className="footer-links">
-          <a href="#">Terms and Conditions</a> | <a href="#">Privacy Policy</a>
+          <Link to="/privacy-policy">Terms and Conditions</Link> | <Link to="/privacy-policy">Privacy Policy</Link>
         </div>
       </footer>
     </div>
