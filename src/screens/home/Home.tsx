@@ -1,11 +1,16 @@
 import './Home.css';
+import nodeBasedImg from '../../assets/screenshots/node-based.png';
+import automaticTrainingImg from '../../assets/screenshots/automatic-training.png';
+import fullyReproducibleImg from '../../assets/screenshots/fully-reproducible.png';
 
 function Home() {
   return (
     <div className="home-container">
       <section className="hero">
         <h1 className="home-title">
-          Easily integrate AI into your research and get higher quality data, 10x faster
+          <span className="gradient-text">Supercharge your research with AI</span>
+          <br />
+          From raw data to publication-ready results
         </h1>
         <p className="hero-subtitle">
           No more repetitive, manual, subjective image analysis. With our easy drag-and-drop solution, 
@@ -26,6 +31,7 @@ function Home() {
             fine-tune every parameter. Not sure where to start? Let our AI suggest an optimal 
             workflow, then adjust it to your needs.
           </p>
+          <img src={nodeBasedImg} alt="Node-based workflow interface" className="feature-image" />
         </div>
 
         <div className="feature">
@@ -34,6 +40,7 @@ function Home() {
             Eliminate repetitive manual work. Our AI learns from your manual processes and 
             recommends the same application for subsequent images. Focus on research, not repetition.
           </p>
+          <img src={automaticTrainingImg} alt="Automatic AI training interface" className="feature-image" />
         </div>
 
         <div className="feature">
@@ -43,6 +50,7 @@ function Home() {
             ready to cite in publications or share with peers. Boost transparency and eliminate 
             result variations between analysts.
           </p>
+          <img src={fullyReproducibleImg} alt="Reproducible analysis interface" className="feature-image" />
         </div>
       </section>
 

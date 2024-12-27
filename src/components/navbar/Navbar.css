@@ -20,7 +20,7 @@
 }
 
 .navbar-logo {
-  height: 40px;
+  height: 45px;
   width: auto;
 }
 
@@ -29,10 +29,11 @@
   color: white;
   border: none;
   padding: 10px 24px;
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 8px;
   font-weight: 500;
+  cursor: pointer;
   transition: background-color 0.2s;
+  font-size: 1em;
 }
 
 .sign-in-button:hover {

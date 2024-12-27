@@ -30,7 +30,7 @@
 }
 
 .download-buttons {
-  display: flex;
+  display: flex;     
   gap: 1rem;
   margin-bottom: 4rem;
 }
@@ -114,4 +114,23 @@
 
 .footer-links a:hover {
   text-decoration: underline;
+}
+
+.feature-image {
+  max-width: calc(100vw - 4rem);
+  width: 150%;
+  margin-left: -25%;
+  margin-right: -25%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.gradient-text {
+  background: linear-gradient(100deg, #11105d, #006acc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 } 
