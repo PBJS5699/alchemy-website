@@ -39,3 +39,20 @@
 .sign-in-button:hover {
   background-color: #0055b3;
 }
+
+.user-button {
+  background: transparent;
+  color: #006acc;
+  border: 2px solid #006acc;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.user-button:hover {
+  background: #006acc;
+  color: white;
+}
