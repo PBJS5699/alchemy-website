@@ -24,19 +24,44 @@
   width: auto;
 }
 
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
 .sign-in-button {
+  background-color: transparent;
+  color: #006acc;
+  border: 2px solid #006acc;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.sign-in-button:hover {
+  background-color: rgba(0, 106, 204, 0.1);
+}
+
+.download-button {
   background-color: #006acc;
   color: white;
   border: none;
-  padding: 10px 24px;
+  padding: 10px 22px;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
-  font-size: 1em;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.sign-in-button:hover {
+.download-button:hover {
   background-color: #0055b3;
 }
 
@@ -53,8 +78,7 @@
 }
 
 .user-button:hover {
-  background: #006acc;
-  color: white;
+  background: rgba(0, 106, 204, 0.1);
 }
 
 .user-menu {
@@ -93,4 +117,23 @@
 
 .dropdown-item:not(:last-child) {
   border-bottom: 1px solid #eee;
+}
+
+.dropdown-item:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background-color: transparent !important;
+  color: #333 !important;
+}
+
+.dropdown-item:disabled:hover {
+  background-color: transparent !important;
+  color: #333 !important;
+}
+
+.os-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
 }

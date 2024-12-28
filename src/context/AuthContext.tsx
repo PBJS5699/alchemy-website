@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { fetchUserAttributes } from 'aws-amplify/auth';
+import { Hub } from 'aws-amplify/utils';
 
 interface AuthContextType {
   userName: string | null;
@@ -22,6 +23,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     refreshUserInfo();
+
+    // Listen for auth events
+    const unsubscribe = Hub.listen('auth', ({ payload }) => {
+      switch (payload.event) {
+        case 'signedIn':
+          refreshUserInfo();
+          break;
+        case 'signedOut':
+          setUserName(null);
+          break;
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   return (

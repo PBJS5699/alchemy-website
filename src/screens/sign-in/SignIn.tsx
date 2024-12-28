@@ -1,9 +1,11 @@
-import { Authenticator, ThemeProvider, useTheme } from '@aws-amplify/ui-react';
+import { Authenticator, ThemeProvider } from '@aws-amplify/ui-react';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState, useMemo } from 'react';
+import { fetchUserAttributes, signIn } from 'aws-amplify/auth';
 import { AuthUser } from '@aws-amplify/auth';
-import { getCurrentUser, fetchUserAttributes } from 'aws-amplify/auth';
+import type { SignInInput, SignInOutput } from '@aws-amplify/auth';
 import '@aws-amplify/ui-react/styles.css';
 import './SignIn.css';
-import { useState, useMemo, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 
 // Add interface for user attributes
@@ -79,7 +81,7 @@ const AffiliationField = ({ label, onChange }: AffiliationFieldProps) => {
         />
         {isOpen && (
           <div className="college-dropdown">
-            {filteredColleges.map((college) => (
+            {filteredColleges.map((college: string) => (
               <div
                 key={college}
                 className="college-option"
@@ -272,29 +274,23 @@ const formFields = {
 };
 
 function SignIn() {
-  const [userAttributes, setUserAttributes] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
   const { refreshUserInfo } = useAuth();
 
+  // Check if user is already signed in
   useEffect(() => {
-    async function fetchAttributes() {
+    async function checkAuth() {
       try {
-        setIsLoading(true);
-        const currentUser = await getCurrentUser();
         const attributes = await fetchUserAttributes();
-        console.log('Current user:', currentUser);
-        console.log('Fetched attributes:', attributes);
-        setUserAttributes(attributes);
-        await refreshUserInfo(); // Refresh the global auth state
+        if (attributes) {
+          navigate('/profile');
+        }
       } catch (error) {
-        console.error('Error fetching user attributes:', error);
-      } finally {
-        setIsLoading(false);
+        // User is not signed in, stay on this page
       }
     }
-
-    fetchAttributes();
-  }, [refreshUserInfo]);
+    checkAuth();
+  }, [navigate]);
 
   return (
     <main className="sign-in-container">
@@ -304,34 +300,20 @@ function SignIn() {
           <Authenticator 
             formFields={formFields}
             components={components}
-          >
-            {({ signOut }) => {
-              const displayName = userAttributes?.['custom:display_name'] || '';
-              const affiliation = userAttributes?.['custom:affiliation'] || '';
-              const email = userAttributes?.email || '';
-
-              if (isLoading) {
-                return (
-                  <div className="signed-in-content">
-                    <div className="loading-spinner">Loading user data...</div>
-                  </div>
-                );
+            services={{
+              async handleSignIn(formData) {
+                const signInResult = await signIn(formData);
+                await refreshUserInfo();
+                navigate('/profile');
+                return signInResult;
               }
-
-              return (
-                <div className="signed-in-content">
-                  <div className="user-info">
-                    <h2>Hello, {displayName}</h2>
-                    <div className="user-details">
-                      <p><strong>Email:</strong> {email}</p>
-                      <p><strong>Affiliation:</strong> {affiliation}</p>
-                    </div>
-                  </div>
-                  <button onClick={signOut} className="sign-out-button">
-                    Sign out
-                  </button>
-                </div>
-              );
+            }}
+          >
+            {({ signOut, user }) => {
+              if (user) {
+                navigate('/profile');
+              }
+              return <div style={{ display: 'none' }} />;
             }}
           </Authenticator>
         </ThemeProvider>
