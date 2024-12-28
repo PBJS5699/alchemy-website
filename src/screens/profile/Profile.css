@@ -1,9 +1,5 @@
 .profile-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  padding: 120px 2rem 0;
+  padding: 120px 0 0;
 }
 
 .profile-content {

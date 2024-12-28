@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Home from "./screens/home/Home.tsx";
 import SignIn from "./screens/sign-in/SignIn.tsx";
 import Profile from "./screens/profile/Profile.tsx";
@@ -14,19 +14,28 @@ import { AuthProvider } from "./context/AuthContext";
 
 Amplify.configure(outputs);
 
+function AppLayout() {
+  const location = useLocation();
+  const showNavbar = location.pathname !== '/sign-in';
+
+  return (
+    <div className="app-container">
+      {showNavbar && <Navbar />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      </Routes>
+    </div>
+  );
+}
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AuthProvider>
       <BrowserRouter>
-        <div className="app-container">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          </Routes>
-        </div>
+        <AppLayout />
       </BrowserRouter>
     </AuthProvider>
   </React.StrictMode>

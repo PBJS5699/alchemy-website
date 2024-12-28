@@ -7,6 +7,7 @@ import type { SignInInput, SignInOutput } from '@aws-amplify/auth';
 import '@aws-amplify/ui-react/styles.css';
 import './SignIn.css';
 import { useAuth } from '../../context/AuthContext';
+import logo from '../../assets/logo/logo.png';
 
 // Add interface for user attributes
 interface UserAttributes {
@@ -295,7 +296,10 @@ function SignIn() {
   return (
     <main className="sign-in-container">
       <div className="auth-wrapper">
-        <h1 className="welcome-text">Welcome to Alchemy</h1>
+        <div className="brand-container">
+          <img src={logo} alt="Alchemy AI" className="auth-logo" />
+          <h1 className="brand-text">Alchemy AI</h1>
+        </div>
         <ThemeProvider theme={theme}>
           <Authenticator 
             formFields={formFields}

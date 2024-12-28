@@ -3,21 +3,21 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 0 2rem;
+  padding: 2rem;
 }
 
 .auth-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
-  margin-top: 0;
+  gap: 2rem;
+  margin-top: -120px;
 }
 
 .welcome-text {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 600;
-  margin: 0;
+  margin: 0 0 2rem;
   background: linear-gradient(100deg, #11105d, #006acc);
   -webkit-background-clip: text;
   background-clip: text;
@@ -237,4 +237,47 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.brand-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.auth-logo {
+  height: 60px;
+  width: auto;
+}
+
+.brand-text {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #11105d;
+  margin: 0;
+}
+
+[data-amplify-authenticator] [data-amplify-router-content] {
+  padding: 0 !important;
+}
+
+[data-amplify-authenticator] [data-amplify-form] {
+  margin: 0;
+}
+
+/* Increase spacing between password field and sign in button */
+[data-amplify-authenticator] [data-amplify-sign-in] [data-amplify-form] {
+  gap: 2rem;
+}
+
+/* Decrease spacing after forgot password */
+[data-amplify-authenticator] [data-amplify-sign-in] [data-amplify-form] [data-amplify-footer] {
+  margin-top: 0.5rem;
+}
+
+/* Keep original spacing for sign up form */
+[data-amplify-authenticator] [data-amplify-sign-up] [data-amplify-form] {
+  gap: 1rem;
 } 

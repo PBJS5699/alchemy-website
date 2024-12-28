@@ -8,9 +8,16 @@ body {
 }
 
 .app-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0 12px;
+  }
 }
 
 main {

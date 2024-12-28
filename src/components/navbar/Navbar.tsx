@@ -61,49 +61,51 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="navbar">
-      <Link to="/" className="navbar-brand">
-        <img src={logo} alt="Alchemy AI" className="navbar-logo" />
-      </Link>
-      <div className="nav-buttons">
-        {userName ? (
-          <div className="user-menu" ref={dropdownRef}>
-            <button 
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)} 
-              className="user-button"
-            >
-              {userName}
+    <div className="navbar-container">
+      <nav className="navbar">
+        <Link to="/" className="navbar-brand">
+          <img src={logo} alt="Alchemy AI" className="navbar-logo" />
+        </Link>
+        <div className="nav-buttons">
+          {userName ? (
+            <div className="user-menu" ref={dropdownRef}>
+              <button 
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)} 
+                className="user-button"
+              >
+                {userName}
+              </button>
+              {isDropdownOpen && (
+                <div className="dropdown-menu">
+                  <button onClick={handleAccountSettings} className="dropdown-item">
+                    Account Settings
+                  </button>
+                  <button 
+                    onClick={handleSignOut} 
+                    className="dropdown-item"
+                    disabled={isSigningOut}
+                  >
+                    {isSigningOut ? 'Signing out...' : 'Sign Out'}
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <button onClick={handleSignIn} className="sign-in-button">
+              Sign In
             </button>
-            {isDropdownOpen && (
-              <div className="dropdown-menu">
-                <button onClick={handleAccountSettings} className="dropdown-item">
-                  Account Settings
-                </button>
-                <button 
-                  onClick={handleSignOut} 
-                  className="dropdown-item"
-                  disabled={isSigningOut}
-                >
-                  {isSigningOut ? 'Signing out...' : 'Sign Out'}
-                </button>
-              </div>
-            )}
-          </div>
-        ) : (
-          <button onClick={handleSignIn} className="sign-in-button">
-            Sign In
+          )}
+          <button className="download-button">
+            <img 
+              src={userOS === 'mac' ? appleLogo : windowsLogo} 
+              alt={userOS === 'mac' ? "Apple logo" : "Windows logo"} 
+              className="os-icon"
+            />
+            Download
           </button>
-        )}
-        <button className="download-button">
-          <img 
-            src={userOS === 'mac' ? appleLogo : windowsLogo} 
-            alt={userOS === 'mac' ? "Apple logo" : "Windows logo"} 
-            className="os-icon"
-          />
-          Download
-        </button>
-      </div>
-    </nav>
+        </div>
+      </nav>
+    </div>
   );
 }
 
