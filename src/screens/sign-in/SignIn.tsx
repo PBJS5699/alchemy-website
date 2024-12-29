@@ -1,5 +1,5 @@
 import { Authenticator, ThemeProvider } from '@aws-amplify/ui-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState, useMemo } from 'react';
 import { fetchUserAttributes, signIn } from 'aws-amplify/auth';
 import { AuthUser } from '@aws-amplify/auth';
@@ -7,7 +7,7 @@ import type { SignInInput, SignInOutput } from '@aws-amplify/auth';
 import '@aws-amplify/ui-react/styles.css';
 import './SignIn.css';
 import { useAuth } from '../../context/AuthContext';
-import logo from '../../assets/logo/logo.png';
+import logoTextStack from '../../assets/logo/logo-text-stack.png';
 
 // Add interface for user attributes
 interface UserAttributes {
@@ -277,28 +277,30 @@ const formFields = {
 function SignIn() {
   const navigate = useNavigate();
   const { refreshUserInfo } = useAuth();
+  const [isNavigating, setIsNavigating] = useState(false);
 
-  // Check if user is already signed in
+  // Check if user is already signed in, but only once on mount
   useEffect(() => {
     async function checkAuth() {
       try {
         const attributes = await fetchUserAttributes();
         if (attributes) {
-          navigate('/profile');
+          navigate('/profile', { replace: true });
         }
       } catch (error) {
         // User is not signed in, stay on this page
       }
     }
     checkAuth();
-  }, [navigate]);
+  }, []); // Only run on mount
 
   return (
     <main className="sign-in-container">
       <div className="auth-wrapper">
         <div className="brand-container">
-          <img src={logo} alt="Alchemy AI" className="auth-logo" />
-          <h1 className="brand-text">Alchemy AI</h1>
+          <Link to="/">
+            <img src={logoTextStack} alt="Alchemy AI" className="auth-logo-stack" />
+          </Link>
         </div>
         <ThemeProvider theme={theme}>
           <Authenticator 
@@ -306,19 +308,23 @@ function SignIn() {
             components={components}
             services={{
               async handleSignIn(formData) {
-                const signInResult = await signIn(formData);
-                await refreshUserInfo();
-                navigate('/profile');
-                return signInResult;
+                if (isNavigating) {
+                  throw new Error('Sign in already in progress');
+                }
+                setIsNavigating(true);
+                try {
+                  const signInResult = await signIn(formData);
+                  await refreshUserInfo();
+                  navigate('/profile', { replace: true });
+                  return signInResult;
+                } catch (error) {
+                  setIsNavigating(false);
+                  throw error;
+                }
               }
             }}
           >
-            {({ signOut, user }) => {
-              if (user) {
-                navigate('/profile');
-              }
-              return <div style={{ display: 'none' }} />;
-            }}
+            {() => <div style={{ display: 'none' }} />}
           </Authenticator>
         </ThemeProvider>
       </div>
