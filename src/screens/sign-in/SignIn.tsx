@@ -17,10 +17,6 @@ interface UserAttributes {
   sub: string;
 }
 
-interface AmplifyUser extends AuthUser {
-  attributes?: UserAttributes;
-}
-
 // List of US colleges (this is a subset, you might want to use a complete list)
 const US_COLLEGES = [
   "Massachusetts Institute of Technology",
