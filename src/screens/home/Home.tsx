@@ -2,9 +2,51 @@ import './Home.css';
 import nodeBasedImg from '../../assets/screenshots/node-based.png';
 import automaticTrainingImg from '../../assets/screenshots/automatic-training.png';
 import fullyReproducibleImg from '../../assets/screenshots/fully-reproducible.png';
+import appleLogo from '../../assets/os-icons/apple-logo.png';
+import windowsLogo from '../../assets/os-icons/windows-logo.png';
 import { Link } from 'react-router-dom';
+import { useMemo } from 'react';
 
 function Home() {
+  const userOS = useMemo(() => {
+    const platform = navigator.platform.toLowerCase();
+    if (platform.includes('mac')) return 'mac';
+    if (platform.includes('win')) return 'windows';
+    return 'other';
+  }, []);
+
+  const getDownloadButton = () => {
+    switch (userOS) {
+      case 'mac':
+        return (
+          <button className="download-btn">
+            <img src={appleLogo} alt="Apple logo" className="os-icon" />
+            Download for Mac
+          </button>
+        );
+      case 'windows':
+        return (
+          <button className="download-btn">
+            <img src={windowsLogo} alt="Windows logo" className="os-icon" />
+            Download for Windows
+          </button>
+        );
+      default:
+        return (
+          <div className="download-buttons">
+            <button className="download-btn">
+              <img src={appleLogo} alt="Apple logo" className="os-icon" />
+              Download for Mac
+            </button>
+            <button className="download-btn">
+              <img src={windowsLogo} alt="Windows logo" className="os-icon" />
+              Download for Windows
+            </button>
+          </div>
+        );
+    }
+  };
+
   return (
     <div className="home-container">
       <section className="hero">
@@ -18,9 +60,8 @@ function Home() {
           create custom image analysis programs for your research you can share with your peers and 
           cite in your research - all without writing a single line of code.
         </p>
-        <div className="download-buttons">
-          <button className="download-btn">Download for Mac</button>
-          <button className="download-btn">Download for Windows</button>
+        <div className="download-section">
+          {getDownloadButton()}
         </div>
       </section>
 

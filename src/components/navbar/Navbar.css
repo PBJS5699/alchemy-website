@@ -1,4 +1,4 @@
-.navbar {
+.navbar-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -6,11 +6,24 @@
   height: 60px;
   background-color: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(8px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.navbar {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 12px;
+  }
 }
 
 .navbar-brand {
@@ -24,18 +37,116 @@
   width: auto;
 }
 
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
 .sign-in-button {
+  background-color: transparent;
+  color: #006acc;
+  border: 2px solid #006acc;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.sign-in-button:hover {
+  background-color: rgba(0, 106, 204, 0.1);
+}
+
+.download-button {
   background-color: #006acc;
   color: white;
   border: none;
-  padding: 10px 24px;
+  padding: 10px 22px;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
-  font-size: 1em;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.sign-in-button:hover {
+.download-button:hover {
   background-color: #0055b3;
+}
+
+.user-button {
+  background: transparent;
+  color: #006acc;
+  border: 2px solid #006acc;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.user-button:hover {
+  background: rgba(0, 106, 204, 0.1);
+}
+
+.user-menu {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 180px;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f5f8fc;
+  color: #006acc;
+}
+
+.dropdown-item:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.dropdown-item:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background-color: transparent !important;
+  color: #333 !important;
+}
+
+.dropdown-item:disabled:hover {
+  background-color: transparent !important;
+  color: #333 !important;
+}
+
+.os-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
 }

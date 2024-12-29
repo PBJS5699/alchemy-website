@@ -29,10 +29,16 @@
   margin-bottom: 3rem;
 }
 
+.download-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 .download-buttons {
-  display: flex;     
+  display: flex;
   gap: 1rem;
-  margin-bottom: 4rem;
+  justify-content: center;
 }
 
 .download-btn {
@@ -41,13 +47,24 @@
   border: none;
   padding: 12px 24px;
   border-radius: 8px;
+  font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .download-btn:hover {
   background-color: #0055b3;
+}
+
+.os-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Makes the icon white */
 }
 
 .features {
